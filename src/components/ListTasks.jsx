@@ -1,22 +1,22 @@
-import React from 'react'
-import Dots from './icons/Dots'
+import Task from "./Task"
 
-const ListTasks = () => {
+import { getTaskDay } from "../helpers/getTaskDay"
+
+const ListTasks = ({ tasks, setTasks, dateM }) => {
+  const currentTasks = getTaskDay(dateM, tasks)
+
   return (
-    <section  className='max-w-[450px] m-auto pb-7 pt-1 px-4'>
-      <div className='flex justify-between gap-4 items-center my-4'>
-        <span className='cursor-pointer'>
-          <input type='checkbox'/
-          className
-          >
-        </span>
-        <p className='grow text-left'>New Task Name </p>
-        <p>
-          <span className='cursor-pointer'>
-          <Dots/>
-          </span>
-        </p>
-      </div>
+    <section className='max-w-[450px] m-auto pb-7 pt-1 px-4'>
+      {
+        currentTasks.map(item => (
+          <Task 
+            key={item.id}
+            item={item}
+            tasks={tasks}
+            setTasks={setTasks}
+          />
+        ))
+      }
     </section>
   )
 }
